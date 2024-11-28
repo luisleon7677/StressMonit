@@ -1,0 +1,41 @@
+{% extends "plantilla.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="titulo-principal">Bienvenido a StressMonit</h1>
+    <p>En esta sección pordrás ver información sobre el nivel de estrés generado por cada cada actividad a lo largo del dia</p>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Duración (seg)</th>
+                <th scope="col">Estrés Promedio</th>
+            </tr>
+        </thead>
+    <tbody>
+    {% for item in resultado %}
+      <tr>
+        <td>{{ item.acti_id }}</td>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.duracion_acumulada }}</td>
+        <td 
+                    {% if item.promedio_estres <= 0.65 %}
+                        style="color: rgb(10, 226, 10);" 
+                    {% elif item.promedio_estres <= 1.3 %}
+                        style="color: yellow;" 
+                    {% else %}
+                        style="color: red;" 
+                    {% endif %}
+                >
+          {{ item.promedio_estres }}
+        </td>
+        
+      </tr>
+    {% endfor %}
+     
+    </tbody>
+  </table>
+</div>
+{% endblock %}

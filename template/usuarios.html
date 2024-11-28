@@ -1,0 +1,104 @@
+{% extends "plantilla.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="titulo-principal">Insertar nuevos usuarios</h1>
+
+<form action="/registrar_usuarios" method="POST" class="formulario">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" class="input-form" required>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" class="input-form" required>
+
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" class="input-form" required>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+<br>
+    <h1 class="titulo-principal">LISTA DE USUARIOS</h1>
+    <!--Lista de usuarios-->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Username</th>
+                <th scope="col">Acciones</th>
+                <th scope="col">Desplegar</th>
+            </tr>
+        </thead>
+    <tbody>
+    {% for usuario in usuarios %}
+      <tr>
+        <td>{{usuario.id}}</td>
+        <td>{{usuario.nombre}}</td>
+        <td>{{usuario.username}}</td>
+        <td>
+          <!-- Formulario para eliminar el usuario -->
+          <form action="{{ url_for('eliminar_usuarios', id=usuario.id) }}" method="POST">
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+          </form>
+          <br>
+          <!-- Formulario para modificar el usuario -->
+          <form action="{{ url_for('update_user', id=usuario.id)}}" method="GET">
+            <button type="submit" class="btn btn-success">Modifcar</button>
+        </form>
+        </td>
+        <td><button class="toggle-btn btn btn-dark" data-user-id="{{ usuario['id'] }}">Ver Actividades</button></td>
+      </tr>
+
+      <tr class="subtabla" id="actividades-{{ usuario['id'] }}">
+        <td colspan="3">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre Actividad</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">VFC</th>
+                        <th scope="col">FR</th>
+                        <th scope="col">FC</th>
+                        <th scope="col">Estrés</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for actividad in usuarios_actividades[usuario['id']] %}
+                        <tr>
+                            <td>{{ actividad['nombre'] }}</td>
+                            <td>{{ actividad['fecha'] }}</td>
+                            <td>{{ actividad['VFC'] }}</td>
+                            <td>{{ actividad['FR'] }}</td>
+                            <td>{{ actividad['FC'] }}</td>
+                            <td 
+                                {% if actividad['estres'] == 0 %}
+                                    style="color: rgb(15, 245, 15);" 
+                                {% elif actividad['estres'] == 1 %}
+                                    style="color: yellow;" 
+                                {% else %}
+                                    style="color: red;" 
+                                {% endif %}
+                            >
+                                {{ actividad['estres'] }}
+                             </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    {% endfor %}
+     
+    </tbody>
+  </table>
+
+  
+
+
+
+
+</div>
+
+
+{% endblock %}

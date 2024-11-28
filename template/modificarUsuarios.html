@@ -1,0 +1,33 @@
+{% extends "plantilla.html" %}
+
+{% block content %}
+<div class="container">
+    
+<h1 class="titulo-principal">Modificar Usuarios</h1>
+
+<!-- Mostrar mensaje de éxito o error, si existe -->
+{% if user %}
+<form action="{{ url_for('actualizar_usuarios', id=user['id']) }}" method="POST" class="formulario" >
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="{{ user['nombre'] }}" class="input-form" required>
+    </div>
+    
+    <div>
+        <label for="correo">Username:</label>
+        <input type="text" id="username" name="username" value="{{ user['username'] }}" class="input-form" required>
+    </div>
+    <div>
+       <label for="correo">Password:</label>
+       <input type="text" id="password" name="password" value="{{ user['password'] }}" class="input-form" required>
+   </div>
+    
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+</form>
+{% else %}
+<p>Usuario no encontrado.</p>
+{% endif %}
+</div>
+
+
+{% endblock %}

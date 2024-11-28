@@ -1,0 +1,63 @@
+body, html {
+    height: 100%;
+    margin: 0;
+   
+}
+.container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Altura del viewport */
+}
+.mi-div {
+    width: 350px; /* Ancho del div */
+    height: 300px; /* Altura del div */
+    padding: 10px;
+    margin: 3px;
+    text-align: center; /* Centra el texto */
+}
+
+/*Estilos del documento plantilla*/
+
+
+.sidebar {
+    width: 200px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #34495e;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+#logo_login{
+    width: 160px;
+    height: auto;
+}

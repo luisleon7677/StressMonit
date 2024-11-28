@@ -1,0 +1,38 @@
+{% extends "plantilla.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="titulo-principal">Modificar actividades</h1>
+
+{% if activity %}
+ <form action="{{ url_for('update_activities', id=activity['id']) }}" method="POST" class="formulario" >
+     <div>
+         <label for="nombre">Nombre:</label>
+         <input type="text" id="nombre" name="nombre" value="{{ activity['nombre'] }}" class="input-form" required>
+     </div>
+     
+     <div>
+         <label for="correo">Descripcion:</label>
+         <textarea id="descripcion" name="descripcion" rows="4" class="input-form" required>{{ activity['descripcion'] }} </textarea>
+     </div>
+     <div>
+        <label for="correo">Grado de dificultad:</label>
+        <select id="dificultad" name="grado_dif"  class="input-form" required>
+            <option value="" disabled selected>{{ activity['grado_dif'] }}</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+     
+     <button type="submit"  class="btn btn-primary">Actualizar</button>
+ </form>
+{% else %}
+ <p>Actividad no encontrada.</p>
+{% endif %}
+
+</div>
+
+
+{% endblock %}
